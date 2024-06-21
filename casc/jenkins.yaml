@@ -105,7 +105,7 @@ unclassified:
   email-ext:
     adminRequiredForTemplateTesting: false
     allowUnregisteredEnabled: false
-    allowedDomains: "@geocom.com.uy"
+    allowedDomains: "@farmashop.com.uy"
     charset: "UTF-8"
     debugMode: false
     defaultBody: |-
@@ -118,7 +118,7 @@ unclassified:
     - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
     mailAccount:
       credentialsId: "email"
-      smtpHost: "correo.geocom.com.uy"
+      smtpHost: "correo.farmashop.com.uy"
       smtpPort: "9025"
       useTls: true
     maxAttachmentSize: -1
@@ -133,7 +133,7 @@ unclassified:
       ignoreCertificateErrors: false
       name: "gitlab-infra"
       readTimeout: 10
-      url: "https://git.geocom.com.uy"
+      url: "https://git.farmashop.com.uy"
     useAuthenticatedEndpoint: true
   globalLibraries:
     libraries:
@@ -146,7 +146,7 @@ unclassified:
             git:
               credentialsId: "gitlab-key"
               id: "ccf8173f-2e1a-44fd-8911-cd6d8bc7a3ad"
-              remote: "ssh://git@git.geocom.com.uy:2222/globals/shared-libraries.git"
+              remote: "ssh://git@git.farmashop.com.uy:2222/globals/shared-libraries.git"
               traits:
               - "gitBranchDiscovery"
 
@@ -174,37 +174,12 @@ credentials:
           scope: GLOBAL
           username: "${jenkins-secret-user-gitlab}"
           usernameSecret: true
-      - string:
-          description: "SOPS Encryption Secret Key"
-          id: "sops-age-secret"
-          scope: GLOBAL
-          secret: "${jenkins-secret-sops-age-secret}"
-      - string:
-          description: "SOPS Encryption Public Key"
-          id: "sops-age-public"
-          scope: GLOBAL
-          secret: "${jenkins-secret-sops-age-public}"
-      - string:
-          description: "AGE SOPS Encryption - TESTING"
-          id: "age-sops-testing"
-          scope: GLOBAL
-          secret: "${jenkins-secret-age-sops-testing}"
-      - string:
-          description: "AGE SOPS Encryption - DEVELOP"
-          id: "age-sops-develop"
-          scope: GLOBAL
-          secret: "${jenkins-secret-age-sops-develop}"
-      - string:
-          description: "AGE SOPS Encryption - STABLE"
-          id: "age-sops-stable"
-          scope: GLOBAL
-          secret: "${jenkins-secret-age-sops-stable}"
       - usernamePassword:
           description: "Email Authentication"
           id: "email"
           password: "${jenkins-secret-mail}"
           scope: GLOBAL
-          username: "jks@geocom.com.uy"
+          username: "jks@farmashop.com.uy"
       - usernamePassword:
           description: "DevOps Automation"
           id: "devops"
