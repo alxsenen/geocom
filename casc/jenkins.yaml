@@ -1,0 +1,213 @@
+jenkins:
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: "file"
+        value: "authorized_keys"
+      - key: "domain"
+        value: "farmashop.com.uy"
+
+  # securityRealm:
+  #   ldap:
+  #     configurations:
+  #       - server: 172.24.230.10
+  #         rootDN: DC=geocomuy,DC=local
+  #         managerDN: "apps-infra"
+  #         managerPasswordSecret: "${jenkins-secret-ldap}"
+  #         userSearch: "(&(objectCategory=User)(sAMAccountName={0}))"
+  #         groupMembershipStrategy:
+  #           fromGroupSearch:
+  #             filter: "(&(objectClass=user)(memberOf=CN=GitAccess,OU=Servicios,DC=geocomuy,DC=local))"
+  #     cache:
+  #       size: 100
+  #       ttl: 10
+
+  securityRealm:
+    local:
+      users:
+      - id: "alhernandez"
+        name: "Alexander Hernandez"
+        password: "${jenkins-secret-alhernandez}"
+        properties:
+          - timeZone:
+              timeZoneName: "America/Montevideo"
+      - id: "adandrea"
+        name: "Alexis D'Andrea"
+        password: "${jenkins-secret-adandrea}"
+        properties:
+          - timeZone:
+              timeZoneName: "America/Montevideo"
+      - id: "devops"
+        name: "DevOps Automation"
+        password: "${jenkins-secret-devops}"
+        properties:
+          - timeZone:
+              timeZoneName: "America/Montevideo"
+
+  # authorizationStrategy:
+  #   globalMatrix:
+  #     entries:
+  #     - group:
+  #         name: "authenticated"
+  #         permissions:
+  #         - "Credentials/CreatZ2xwYXQtcmVlaWtQLVBFeVoxdmpkYUFfZVY=e"
+  #         - "Credentials/View"
+  #         - "Job/Build"
+  #         - "Job/Cancel"
+  #         - "Job/Configure"
+  #         - "Job/Create"
+  #         - "Job/Move"
+  #         - "Job/Read"
+  #         - "Job/Workspace"
+  #         - "Metrics/HealthCheck"
+  #         - "Metrics/ThreadDump"
+  #         - "Metrics/View"
+  #         - "Run/Replay"
+  #         - "Run/Update"
+  #         - "SCM/Tag"
+  #         - "View/Configure"
+  #         - "View/Create"
+  #         - "View/Read"
+  #     - user:
+  #         name: "alhernandez"
+  #         permissions:
+  #         - "Overall/Administer"
+  #     - user:
+  #         name: "ferodriguez"
+  #         permissions:
+  #         - "Overall/Administer"
+
+  primaryView:
+    all:
+      name: "all"
+  viewsTabBar: "standard"
+  
+security: 
+  gitHooks:
+    allowedOnAgents: false
+    allowedOnController: false
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "acceptFirstConnectionStrategy"
+  scriptApproval:
+    approvedScriptHashes:
+    - "SHA512:03a1f1b6b723475042d64a07269e3126d0712d06d056969581dcd42b90d2194b18b27c1883b050c97ab337c99917b1433466f393d99636056afe4c30fbd23c54"
+    - "SHA512:31d111411f0a69516c35357ba58b02242d22fe4a106b87db17f5430a781e2f6fba1f5196f2e88d7cf96472b00d1d5f085e84b0bf4e67b82dfceb9afe171e0623"
+    - "SHA512:3f205299bef2fe3329258a42f2c60d332cc35ccb41a3ca0512d7869c6aff4561ff708c48123b4f7c3dec33ccca30d54fb8b9b51b5bc7070f96236d11a3f0bdcb"
+    - "SHA512:55b062c839aa7d4c069b9859bceba06536b222b1a11cd834340a09263beae66977042848115a2e5a2b042cbce62be82dc2dfc339376fe66aaf48fd62463079fb"
+    - "SHA512:679ea9d62a341375b1c2cc6ce6f6bc2b7c8cfb31fe77f41997da395b6cf3b44249ce74032f6845435bd426f8b45e9b38ffae84f226880d1d83c1e935de41283f"
+    - "SHA512:79410a6aab74627fc5c7d3e4e318c1c79d7d4ac8da8eadafc816448d4720bf41ff7417058106d07bc0fa381d52d1d84750802ad36bd13633280b1ee0ed7da217"
+    - "SHA512:88319714110fa54a89a95c5557d876d77e58f681218faefbfd06906ed8cab831206a01ca60a12356bc26023a510a812a4291a2734fe071150a0de3adb63715f6"
+    - "SHA512:89bfebc90e0a9afad4c3b2f1606398000700685a3f1d5dd9d950419bf4222fd35258c7e4088c17a451ef1054ee6e94abbe51f1aa6717ab3b5cd14e65fcebb707"
+    - "SHA512:b4db7d6138ba77a25f375934b6c7588045dd2895a28f584adf854cfee89e4b5a799143a7acb36640e8ed117022e430a936cdfca0265e432002748b25720e50a6"
+    - "SHA512:cca7451b8bb948a01bbd77158e7866dcc0eaf3e4245bd1621e73ff269dd874e3e4b760f8239d7251a5bef46bcd1d2b6c7f5639c66dae9f967aa91be91babc8e4"
+
+unclassified:
+  email-ext:
+    adminRequiredForTemplateTesting: false
+    allowUnregisteredEnabled: false
+    allowedDomains: "@geocom.com.uy"
+    charset: "UTF-8"
+    debugMode: false
+    defaultBody: |-
+      $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+      Check console output at $BUILD_URL to view the results.
+    defaultContentType: "text/plain"
+    defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
+    defaultTriggerIds:
+    - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
+    mailAccount:
+      credentialsId: "email"
+      smtpHost: "correo.geocom.com.uy"
+      smtpPort: "9025"
+      useTls: true
+    maxAttachmentSize: -1
+    maxAttachmentSizeMb: -1
+    precedenceBulk: false
+    watchingEnabled: false
+  gitLabConnectionConfig:
+    connections:
+    - apiTokenId: "gitlab-token"
+      clientBuilderId: "autodetect"
+      connectionTimeout: 10
+      ignoreCertificateErrors: false
+      name: "gitlab-infra"
+      readTimeout: 10
+      url: "https://git.geocom.com.uy"
+    useAuthenticatedEndpoint: true
+  globalLibraries:
+    libraries:
+    - defaultVersion: "main"
+      name: "shared-libraries"
+      retriever:
+        modernSCM:
+          libraryPath: "./"
+          scm:
+            git:
+              credentialsId: "gitlab-key"
+              id: "ccf8173f-2e1a-44fd-8911-cd6d8bc7a3ad"
+              remote: "ssh://git@git.geocom.com.uy:2222/globals/shared-libraries.git"
+              traits:
+              - "gitBranchDiscovery"
+
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - gitLabApiTokenImpl:
+          apiToken: "${jenkins-secret-token-gitlab}"
+          description: "Gitlab API Token"
+          id: "gitlab-token"
+          scope: GLOBAL
+      - basicSSHUserPrivateKey:
+          description: "Gitlab Private Key"
+          id: "gitlab-key"
+          privateKeySource:
+            directEntry:
+              privateKey: "${jenkins-secret-ssh-key}"
+          scope: GLOBAL
+          username: "git"
+      - usernamePassword:
+          description: "Gitlab Credentials"
+          id: "apps-infra-token"
+          password: "${jenkins-secret-token-gitlab}"
+          scope: GLOBAL
+          username: "${jenkins-secret-user-gitlab}"
+          usernameSecret: true
+      - string:
+          description: "SOPS Encryption Secret Key"
+          id: "sops-age-secret"
+          scope: GLOBAL
+          secret: "${jenkins-secret-sops-age-secret}"
+      - string:
+          description: "SOPS Encryption Public Key"
+          id: "sops-age-public"
+          scope: GLOBAL
+          secret: "${jenkins-secret-sops-age-public}"
+      - string:
+          description: "AGE SOPS Encryption - TESTING"
+          id: "age-sops-testing"
+          scope: GLOBAL
+          secret: "${jenkins-secret-age-sops-testing}"
+      - string:
+          description: "AGE SOPS Encryption - DEVELOP"
+          id: "age-sops-develop"
+          scope: GLOBAL
+          secret: "${jenkins-secret-age-sops-develop}"
+      - string:
+          description: "AGE SOPS Encryption - STABLE"
+          id: "age-sops-stable"
+          scope: GLOBAL
+          secret: "${jenkins-secret-age-sops-stable}"
+      - usernamePassword:
+          description: "Email Authentication"
+          id: "email"
+          password: "${jenkins-secret-mail}"
+          scope: GLOBAL
+          username: "jks@geocom.com.uy"
+      - usernamePassword:
+          description: "DevOps Automation"
+          id: "devops"
+          password: "${jenkins-secret-devops}"
+          scope: GLOBAL
+          username: "devops"

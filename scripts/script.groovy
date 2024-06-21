@@ -1,0 +1,1 @@
+"rm -rf ${Jenkins.instance.root.toString()}/jobs/ENVIRONMENT/jobs/configurations/jobs/sshpubkeys/jobs/create/builds/BUILD_NUMBER/archive".execute().text
